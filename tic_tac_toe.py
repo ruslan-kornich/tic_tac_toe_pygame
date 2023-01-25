@@ -63,7 +63,7 @@ def bconv(TTT):
     return board
 
 
-def tconv(board):
+def t_to_b_conversion(board):
     # T to B Conversion
     TTT = [[None] * 3, [None] * 3, [None] * 3]
     z = 1
@@ -80,11 +80,11 @@ def tconv(board):
     return TTT
 
 
-def insertLetter(letter, pos):
+def insert_letter(letter, pos):
     board[pos] = letter
 
 
-def spaceIsFree(pos):
+def space_is_free(pos):
     return board[pos] == " "
 
 
@@ -218,7 +218,7 @@ def draw_x_or_o(row, col):
     pg.display.update()
 
 
-def userClick():
+def user_click():
     # get coordinates of mouse click
     (x, y) = pg.mouse.get_pos()
 
@@ -250,7 +250,7 @@ def userClick():
         check_win()
 
 
-def Cclick(move):
+def column_click(move):
     # Getting Row and Column for Drawing Line
     z = 1
     for i in range(3):
@@ -369,7 +369,7 @@ while not is_board_full(board):
             board = bconv(TTT)
 
             if not is_winner(board, "O"):  # User Panel
-                userClick()
+                user_click()
                 board = bconv(TTT)
                 check_win()
             else:
@@ -381,9 +381,9 @@ while not is_board_full(board):
                 if move == 0:
                     pass
                 else:
-                    insertLetter("O", move)
-                    TTT = tconv(board)
-                    (x, y) = Cclick(move)
+                    insert_letter("O", move)
+                    TTT = t_to_b_conversion(board)
+                    (x, y) = column_click(move)
                     draw_x_or_o(x + 1, y + 1)
                     check_win()
             else:
