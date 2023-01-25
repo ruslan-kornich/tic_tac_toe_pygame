@@ -115,19 +115,22 @@ def draw_status():
         if winner.upper() == "O":
             message = "Computer Won!"
             message_winners.append(message)
+
         else:
             message = "User Won!"
             message_winners.append(message)
+
     if draw:
         message = "Game Draw!"
         message_winners.append(message)
-    if len(message_winners) > 0:
 
-        json_dict = {"time": f'{datetime.now()}', "history": f'{message_winners[0]}'}
-        a = json.dumps(json_dict)
-        with open('data.json', 'a') as f:
-            json_obj = json.loads(a)
-            json.dump(json_obj, f, indent=2)
+    if len(message_winners) > 0:
+        json_data = {
+            "time": f'{datetime.now()}',
+            "history": f'{message_winners[0]}'}
+        with open("data.json", "a") as file:
+            json.dump(json_data, file, indent=2, ensure_ascii=False)
+            file.write(',\n')
 
     font = pg.font.Font(None, 30)
     text = font.render(message, 1, (255, 255, 255))
